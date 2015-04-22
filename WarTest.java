@@ -19,10 +19,14 @@ public class WarTest
    //Main
    public static void main(String[] args)
    {
-      Random rand = new Random();
       
-      ArrayList<Card> cardArray = new ArrayList<Card>(); 
+      //Create arraylist to hold a deck of cards
+      ArrayList<Card> cardArray = new ArrayList<Card>();
+      
+      //Create arraylist to hold player1 cards 
       ArrayList<Card> player1 = new ArrayList<Card>();
+      
+      //Create arraylist to hols player2 cards
       ArrayList<Card> player2 = new ArrayList<Card>();
       
       //Create deck of cards     
@@ -42,6 +46,8 @@ public class WarTest
       System.out.println("*************");
       
        
+      //Add cards for player1
+      //First 26 card objects 
       int c = 0;
       Card card2;
       while(c < 26)
@@ -52,6 +58,8 @@ public class WarTest
             c++;
       }
       
+      //Add cards for player2
+      //Second 26 card objects
       Card card3;
       while(c < 52)
       {
@@ -61,50 +69,62 @@ public class WarTest
       
       }
       
+      
       int count = 0;
-    
-         
-               for(int i = 0; (i < player2.size()) && (i < player1.size()); i++)
-               {
+      
+      //While each player does not have 0 cards, keep playing
+      while((player1.size() != 0) && (player2.size() != 0))
+      {
+                  //Run through the two players' decks
+                  for(int i = 0; (i < player2.size()) && (i < player1.size()); i++)
+                  {
                   
+                  //Get Card object at indexes of player 1 and player 2
                   System.out.println("_____________");
                   System.out.println(count);
                   System.out.println(player1.get(i));
                   System.out.println(player2.get(i));
-                  
-                  
                   System.out.println("_____________");
                   count++;
                   
+                  //If player 1's card equals player 2's card
                   if(player1.get(i).equals(player2.get(i)))
                   {
                      System.out.println(player1.get(i).toString() + " has the same rank as " + player2.get(i).toString() 
                      + " with a rank of: "+player1.get(i).getRank());
                      System.out.println("The cards are equal.");
-                     if(player1.get(i+1).getRank() < player2.get(i+1).getRank())
+                     
+                     //While these cards are still equal, get the next 2 cards
+                     while(player1.get(i).equals(player2.get(i)))
                      {
-                        player2.add(player1.get(i));
-                        player2.add(player1.get(i+1));
-                        player1.remove(i);
-                        player1.remove(i+1);
+                        //If second card of player 1 is less than second card of player 2
+                        if(player1.get(i+1).getRank() < player2.get(i+1).getRank())
+                        {
+                           //Player 1 gets both of player 2's cards 
+                           //And those cards that player 2 gets, will be removed from player 1's deck
+                           player2.add(player1.get(i));
+                           player2.add(player1.get(i+1));
+                           player1.remove(i);
+                           player1.remove(i+1);
+                           
+                        }
                         
-                     }
-                     
-                     if(player2.get(i+1).getRank() < player1.get(i+1).getRank())
-                     {
-                        player1.add(player2.get(i));
-                        player1.add(player2.get(i+1));
-                        player2.remove(i);
-                        player2.remove(i+1);
+                        //If 
+                        if(player2.get(i+1).getRank() < player1.get(i+1).getRank())
+                        {
+                           player1.add(player2.get(i));
+                           player1.add(player2.get(i+1));
+                           player2.remove(i);
+                           player2.remove(i+1);
+                           
+                        }
                         
-                     }
-                     
-                     
+                    } 
 
                      
                   } 
                   
-                  else if(player1.get(i).getRank() < player2.get(i).getRank())
+                  if(player1.get(i).getRank() < player2.get(i).getRank())
                   {
                      player2.add(player1.get(i));
                      player1.remove(i);
@@ -128,17 +148,18 @@ public class WarTest
                   
                  
                 }  
-                
+              }  
                 
               if (player1.size() == 0)
                  System.out.println("Player 2 Wins");
                
-              if (player2.size() == 0)
+              else if(player2.size() == 0)
                  System.out.println("Player 1 Wins");                          
               
-               System.out.println(player2.size());
-                  System.out.println(player1.size());
-                  
+              
+              System.out.println(player1.size());
+              System.out.println(player2.size());
+                                
                   if(player1.size() > player2.size())
                      System.out.println("1 Wins");
                   if(player2.size() > player1.size())
