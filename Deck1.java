@@ -43,7 +43,7 @@ public class Deck1
            deck.add(new Card(r,s));
          }
       }
-      System.out.println(deck.get(1));
+      
      
    
    }
@@ -97,16 +97,13 @@ public class Deck1
       Deck1 deck = new Deck1();
       deck.shuffle();
       int i = 0;
-      while (!(deck.isEmpty()))
-         System.out.println(i++ + " : " + deck.dealCard().toString());
+      
       System.out.println(deck.cardsRemaining());
       deck.freshDeck();
-      while (!(deck.isEmpty()))
-         System.out.println(i++ + " : " + deck.dealCard().toString());
-         
-      Card c1 = new Card(Card.ACE,Card.HEART);
-      Card c2 = new Card(Card.JACK,Card.SPADE);
-      Card c3 = new Card(4,Card.HEART);
+      
+      Card c1 = new Card(Card.HEART,Card.ACE);
+      Card c2 = new Card(Card.SPADE,Card.JACK);
+      Card c3 = new Card(Card.HEART,4);
       
       System.out.println(highCard(c1,c2,c3));
       
