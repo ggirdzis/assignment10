@@ -34,8 +34,7 @@ public class Deck1
    public void freshDeck()
    {
       deck = new ArrayList<Card>();
-      System.out.println(deck.size());
-
+      
       for (int r = Card.ACE; r<=Card.KING;r++)
       {
          for (int s=Card.SPADE;s<=Card.CLUB;s++)
@@ -43,6 +42,7 @@ public class Deck1
            deck.add(new Card(r,s));
          }
       }
+      
       
      
    
@@ -97,10 +97,13 @@ public class Deck1
       Deck1 deck = new Deck1();
       deck.shuffle();
       int i = 0;
-      
+      while (!(deck.isEmpty()))
+         System.out.println(i++ + " : " + deck.dealCard().toString());
       System.out.println(deck.cardsRemaining());
       deck.freshDeck();
-      
+      while (!(deck.isEmpty()))
+         System.out.println(i++ + " : " + deck.dealCard().toString());
+         
       Card c1 = new Card(Card.HEART,Card.ACE);
       Card c2 = new Card(Card.SPADE,Card.JACK);
       Card c3 = new Card(Card.HEART,4);
