@@ -246,5 +246,39 @@ public class Card
       return status;
    
    }
+   
+   public boolean greater(Card otherCard)
+   {
+      boolean status;
+      
+      if(rank > (otherCard.getRank()))
+      {
+         status=true;
+      }
+      else
+      {
+         status=false;
+      }
+      return status;
+   
+   }
+   
+   public boolean less(Card otherCard)
+   {
+      boolean status;
+      
+      if(rank==(otherCard.getRank()))
+      {
+         status=true;
+      }
+      else
+      {
+         status=false;
+      }
+      return status;
+   
+   }
+   
+   
 }
 

@@ -8,7 +8,7 @@
 import java.util.Random;
 import java.util.ArrayList;
 
-public class Deck1
+public class Deck1 extends Card
 {
    /** 
    *  Number of cards in standard deck {@value #CARDS_IN_DECK}
@@ -16,47 +16,59 @@ public class Deck1
    final int CARDS_IN_DECK = 52;
 
    /** The collection of Cards */
-   private ArrayList<Card> deck;
+   private ArrayList<Card> deck = new ArrayList<Card>();
+   
+   public ArrayList<Card> getArray()
+   {
+   
+      return deck;
+   
+   
+   }
    
    /**
     * Constructs a regular 52-card deck.  Initially, the cards
     * are in a sorted order.  The shuffle() method can be called to
     * randomize the order.  
     */
+    
    public Deck1()
    {        
-            
+            super(0,0);
             freshDeck();
    }
+   
+   
    /**
-    * Create a new collection of 52 cards, in sorted order
-    */
+   Create a new collection of 52 cards, in sorted order
+   */
    public void freshDeck()
    {
-      deck = new ArrayList<Card>();
       
-      for (int r = Card.ACE; r<=Card.KING;r++)
+      for(int i = 1; i < 13+1; i++)
       {
-         for (int s=Card.SPADE;s<=Card.CLUB;s++)
+         for(int j = 1; j < 4+1; j++)
          {
-           deck.add(new Card(r,s));
+            
+            deck.add(new Card(j,i));
+            
          }
       }
-      
+            
       
      
    
    }
+   
+  
+   
+   
    /** 
      * Remove and return the top Card on the Deck
      * @return A reference to a Card that was top on the Deck
      */
-   public Card dealCard()
-   {
-      Card c = deck.remove(0);  //  remove it (returns removed object)
-      return c;
-   }
-   /** 
+      
+     /** 
      * Return current number of Cards in Deck
      * @return number of Cards in Deck
      */
@@ -65,9 +77,12 @@ public class Deck1
    {  
       return deck.size();
    }
+   
    /** 
      * Randomize the order of Cards in Deck
-     */
+   */
+   
+   
 
    public void shuffle()
    {
@@ -92,40 +107,8 @@ public class Deck1
       return (deck.size() == 0);
    }
 
-   public static void main(String [] args) 
-   {
-      Deck1 deck = new Deck1();
-      deck.shuffle();
-      int i = 0;
-      while (!(deck.isEmpty()))
-         System.out.println(i++ + " : " + deck.dealCard().toString());
-      System.out.println(deck.cardsRemaining());
-      deck.freshDeck();
-      while (!(deck.isEmpty()))
-         System.out.println(i++ + " : " + deck.dealCard().toString());
-         
-      Card c1 = new Card(Card.HEART,Card.ACE);
-      Card c2 = new Card(Card.SPADE,Card.JACK);
-      Card c3 = new Card(Card.HEART,4);
-      
-      System.out.println(highCard(c1,c2,c3));
-      
-
-   }
-   public static Card highCard(Card...cards)
-   {
    
-      Card high = cards[0];
-      for (int i=1;i<cards.length;i++)
-      {
-         if (cards[i].getRank() > high.getRank())
-         {
-         
-            high = cards[i];
-         }
-      }
-      return high;
    
-   }
+  
 }
 
