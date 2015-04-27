@@ -267,7 +267,7 @@ public class Card
    {
       boolean status;
       
-      if(rank==(otherCard.getRank()))
+      if(rank < (otherCard.getRank()))
       {
          status=true;
       }
