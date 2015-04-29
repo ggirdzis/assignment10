@@ -69,11 +69,11 @@ public class WarTest
       
       
       
-      
+      int i = 0;
       //While each player's deck size does not equal zero
       while((player1.size() > 0) && (player2.size() > 0))
       {
-      int i = 0;
+      
       int ct = 0;
       //for(int i = 0;(i<player1.size()) && (i<player2.size());i++)
       
@@ -94,12 +94,17 @@ public class WarTest
       {
          
          //While two cards are still equal
-         //while(player1.get(i).equals(player2.get(i)))
-         //{
+         if((player1.size() > 0) && (player2.size() > 0))
+         {
               //Use war
-              War(player1,player2,i);                 
-              
-         //}
+              War(player1,player2,i); 
+              player1.add(player1.get(i));
+              player2.add(player2.get(i));              
+              player1.remove(i);
+              player2.remove(i);
+         }
+         //else
+            //System.out.println("Done");
       }  
        
       //If player 1 is greater than player 2   
@@ -127,16 +132,18 @@ public class WarTest
       System.out.println(player1.size());
       System.out.println(player2.size());
       
-      i++;
+      
       //} 
       ct++;
       }
+      
+      
      
       //Player 2 wins or player 1 wins
-      if(player1.size() == 0)
+      if(player1.size() <= 0)
          System.out.println("Player 2 wins");
          
-      else if(player2.size() == 0)
+      else if(player2.size() <= 0)
          System.out.println("Player 1 wins");       
       
                       
@@ -152,75 +159,109 @@ public class WarTest
    
        } 
        
-       
        //War method 
        public static void War(ArrayList<Card> play1,ArrayList<Card> play2,int index)
        {
+            //Create table array
             ArrayList<Card> table = new ArrayList<Card>();
-            
+           
+            //While two cards are equals
             while(play1.get(index).equals(play2.get(index)))
-            {
+            {   
+                
                 System.out.println(play1.get(index).toString() + " has the same rank as " + play2.get(index).toString() 
                 + " with a rank of: "+play1.get(index).getRank());
                 System.out.println("The cards are equal.");
 
+                //Add original tying cards
                 table.add(play1.get(index));
                 table.add(play2.get(index));
                 
-                table.add(play1.get(index+1));
-                System.out.println("a" + play1.get(index+1));
-                table.add(play2.get(index+1));
-                System.out.println("b" + play2.get(index+1));
+                //Remove from both hands
+                play1.remove(index);
+                play2.remove(index);
+                 
                 
+                //Get next two cards
+                table.add(play1.get(index));
+                System.out.println("a" + play1.get(index));
+                table.add(play2.get(index));
+                System.out.println("b" + play2.get(index));
                 
-                
-                table.add(play1.get(index+2));
-                System.out.println("c" + play1.get(index+2));
-                table.add(play2.get(index+2));
-                System.out.println("d" + play2.get(index+2));
+                //Remove those cards from both hands
                 play1.remove(index);
                 play2.remove(index);
                 
-                play1.remove(index+1);
-                play2.remove(index+1); 
+                //Get next two cards
                 
-                play1.remove(index+2);
-                play2.remove(index+2); 
+                System.out.println("c" + play1.get(index));
+                table.add(play1.get(index));
+                System.out.println("d" + play2.get(index));
+                table.add(play2.get(index));
                 
                 
-                System.out.println("SPIN1" + play1.get(index));
-                System.out.println("SPIN2" + play2.get(index));
                 
-                 
-            }
-            
-            
+                play1.remove(index);
+                play2.remove(index);
+                
+                System.out.println("1" + play1.get(index));
+                System.out.println("2" + play2.get(index));
+
+                     
+            //If player 1 is greater than player 2
             if(play1.get(index).greater(play2.get(index)))
             {
                for(int t = 0; t < table.size(); t++)
+               {
                    play1.add(table.get(t));
                    
+                   
+               }
                
                
-               
-               
-         
             }  
       
             //If player 1 is less than player 2
             else if(play1.get(index).less(play2.get(index)))
             {
                for(int t = 0; t < table.size(); t++)
+               {
                    play2.add(table.get(t));
-                   
+                 
+               }
                
               
-                   
-               
+                  
             } 
-      
+           }
+           
+           
 
+                
+               
+                
+                
+                
+                  
+                
+              
+                
             
+               
+            
+       
+            
+           
+            
+              
+                          
+            
+           
+            
+                       
+            
+            
+                 
             
             
             

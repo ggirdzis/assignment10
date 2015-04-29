@@ -22,7 +22,7 @@ public class Deck1 extends Card
    {
    
       return deck;
-   
+      
    
    }
    
