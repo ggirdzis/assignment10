@@ -40,8 +40,9 @@ public class WarGUI extends JFrame
       add(topPanel);
       add(gamePanel);
    }
+}   
    // handle button events
-   private class ButtonListener implements ActionListener
+   public class ButtonListener implements ActionListener
    {
       public void actionPerformed(ActionEvent e)
       {     
@@ -89,4 +90,3 @@ public class WarGUI extends JFrame
    }     
 
 
-}
