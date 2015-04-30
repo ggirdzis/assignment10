@@ -1,7 +1,7 @@
 /*Gretchen Girdzis
 CS110
 Assignment 5
-Challenge 3 - Card class*/
+Card class*/
 
 /**
    The Card class simulates a deck of cards.
@@ -38,8 +38,8 @@ public class Card
    
    /**
       Constructor initializes suit and rank.
-      @param The suit of the card.
-      @param The rank of the card.
+      @param aSuit The suit of the card.
+      @param aRank The rank of the card.
    */
    public Card(int aSuit, int aRank)
    {
@@ -247,6 +247,12 @@ public class Card
    
    }
    
+   /**
+      The greater method compares the rank with another object's rank of the Card class.
+      @param otherCard Card class object.
+      @return The status of the boolean from the if statements in the method.
+   */
+   
    public boolean greater(Card otherCard)
    {
       boolean status;
@@ -262,6 +268,12 @@ public class Card
       return status;
    
    }
+   
+   /**
+      The less method compares the rank with another object's rank of the Card class.
+      @param otherCard Card class object.
+      @return The status of the boolean from the if statements in the method.
+   */ 
    
    public boolean less(Card otherCard)
    {

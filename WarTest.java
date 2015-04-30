@@ -1,22 +1,32 @@
 /*Gretchen Girdzis
 CS110
-Assignment 5
-Card Problem*/
+Assignment 10
+War Driver*/
 
 /**
-   This program demonstrates the Card class to determine whether two cards are equal based 
-   on rank.
+   This program demonstrates the Deck class to simulate a game of war. Cards are compared
+   to determine which player gets cards. Originally, the player with the higher cards takes both cards 
+   drawn for a round. If these cards tie, the players draw another face down, and then another face down,
+   and then another face up. This determines who takes all cards that have been draw. If those cards 
+   are equal in rank, another "war" occurs, where three more cards are put down and the third is compared
+   again for each player. 
 */
 
 //Import Scanner
 import java.util.Scanner;
+//Import Random
 import java.util.Random;
+//Import ArrayList
 import java.util.ArrayList;
 
 //Class
 public class WarTest
 {
-   //Main
+   /**
+      The main method tests the functionality of the war game.
+      
+   
+   */
    public static void main(String[] args)
    {
    
@@ -25,25 +35,31 @@ public class WarTest
       
       //Shuffle
       d.shuffle();
+      
+      //Create array of Card objects
       ArrayList<Card> deck = new ArrayList<Card>();
+      
+      //This deck equals the deck that is created in Deck1 class
       deck = d.getArray();
       
-      //Create arraylist to hold player1 cards 
+      //Create arraylist to hold player1 Card objects
       ArrayList<Card> player1 = new ArrayList<Card>();
       
-      //Create arraylist to hols player2 cards
+      //Create arraylist to hols player2 Card objects
       ArrayList<Card> player2 = new ArrayList<Card>();      
       
-       //Add cards for player1
+      //Add cards for player1
       //First 26 card objects 
       int c = 0;
       Card card2;
       while(c < 26)
       {
             
+            //Get Card at specific index in deck
             card2 = deck.get(c);
+            //Add this Card to the player1 array
             player1.add(card2);
-            
+            //Increment c
             c++;
       }
       
@@ -52,37 +68,40 @@ public class WarTest
       Card card3;
       while(c < 52)
       {
+            //Get Card at specific index in deck
             card3 = deck.get(c);
+            //Add this Card to the player2 array
             player2.add(card3);
-            
+            //Increment c
             c++;
       
       }
       
       
-      
+      //Remove cards from the main deck
       for(int t = 0; t < deck.size(); t++)
       {
          deck.remove(t);
       }
       
       
-      
-      
+      //Initialize i as the index
       int i = 0;
-      //While each player's deck size does not equal zero
-      while((player1.size() > 0) && (player2.size() > 0))
+      final int MIN_CARDS = 3;
+      
+      //While each player's deck size is greater than three
+      while((player1.size() > MIN_CARDS) && (player2.size() > MIN_CARDS))
       {
       
-      int ct = 0;
-      //for(int i = 0;(i<player1.size()) && (i<player2.size());i++)
+      
       
         
-         //Display card
+         //Display player 1 card
          System.out.println("************");
-         System.out.println(player1.get(i));
+         System.out.println("Player 1: " + player1.get(i));
          
-         System.out.println(player2.get(i));
+         //Diplay player 2 card
+         System.out.println("Player 2: " + player2.get(i));
          System.out.println("************");
          
          
@@ -93,26 +112,22 @@ public class WarTest
       if(player1.get(i).equals(player2.get(i)))
       {
          
-         //While two cards are still equal
-         if((player1.size() > 0) && (player2.size() > 0))
-         {
-              //Use war
+         
+              //Go through War calling War method
               War(player1,player2,i); 
-              player1.add(player1.get(i));
-              player2.add(player2.get(i));              
-              player1.remove(i);
-              player2.remove(i);
-         }
-         //else
-            //System.out.println("Done");
+              
+         
       }  
        
       //If player 1 is greater than player 2   
       else if(player1.get(i).greater(player2.get(i)))
       {
       
+         //Player 1 gets player 1's card and player 2's card
          player1.add(player2.get(i));
          player1.add(player1.get(i));
+         
+         //Remove both instances of that first card from both hands
          player1.remove(player1.get(i));
          player2.remove(i);
       
@@ -121,54 +136,70 @@ public class WarTest
       //If player 1 is less than player 2
       else if(player1.get(i).less(player2.get(i)))
       {
+         //Player 2 gets player 1's card and player 2's card
          player2.add(player1.get(i));
          player2.add(player2.get(i));
+         //Remove both instances of that first card from both hands
          player2.remove(player2.get(i));
          player1.remove(i);
       
       } 
       
       //Print card size
-      System.out.println(player1.size());
-      System.out.println(player2.size());
+      System.out.println("Player 1 Cards Remaining: " + player1.size());
+      System.out.println("Player 2 Cards Remaining: " + player2.size());
       
       
-      //} 
-      ct++;
+       
+      
       }
       
       
      
       //Player 2 wins or player 1 wins
-      if(player1.size() <= 0)
-         System.out.println("Player 2 wins");
+      if(player1.size() > player2.size())
+         System.out.println("Player 1 wins");
          
-      else if(player2.size() <= 0)
-         System.out.println("Player 1 wins");       
+      else if(player2.size() > player1.size())
+         System.out.println("Player 2 wins");       
       
                       
-              
-}      
-       //Draw next card method
-       public static Card draw(ArrayList<Card> player,int index) 
-       {
+      }  
+          
+      /**
+         The draw method returns a card at a specific index.
+         @param player Arraylist of card objects representing a player.
+         @param index The index to get specified Card.
+         @return The card in specified arraylist at specified index.
+      
+      */
+      public static Card draw(ArrayList<Card> player,int index) 
+      {
       
          Card card = player.get(index);
       
          return card;
    
-       } 
+      } 
        
-       //War method 
-       public static void War(ArrayList<Card> play1,ArrayList<Card> play2,int index)
-       {
+      /**
+         The War method simulates a war, where two cards tie and more cards must be drawn.
+         @param play1 Player 1's hand.
+         @param play2 Player 2's hand.
+         @param index The index to specify cards within the hand arraylists.
+         
+      
+      */ 
+      public static void War(ArrayList<Card> play1,ArrayList<Card> play2,int index)
+      {
             //Create table array
             ArrayList<Card> table = new ArrayList<Card>();
            
-            //While two cards are equals
+            //While two cards are equal
             while(play1.get(index).equals(play2.get(index)))
             {   
                 
+                //Print that they have the same rank
                 System.out.println(play1.get(index).toString() + " has the same rank as " + play2.get(index).toString() 
                 + " with a rank of: "+play1.get(index).getRank());
                 System.out.println("The cards are equal.");
@@ -184,35 +215,38 @@ public class WarTest
                 
                 //Get next two cards
                 table.add(play1.get(index));
-                System.out.println("a" + play1.get(index));
+                System.out.println("Player 1 Face Down: " + play1.get(index));
                 table.add(play2.get(index));
-                System.out.println("b" + play2.get(index));
+                System.out.println("Player 2 Face Down: " + play2.get(index));
                 
                 //Remove those cards from both hands
                 play1.remove(index);
                 play2.remove(index);
                 
                 //Get next two cards
-                
-                System.out.println("c" + play1.get(index));
+                System.out.println("Player 1 Face Down: " + play1.get(index));
                 table.add(play1.get(index));
-                System.out.println("d" + play2.get(index));
+                System.out.println("Player 2 Face Down: " + play2.get(index));
                 table.add(play2.get(index));
+                 
                 
-                
-                
+                //Remove those cards from both hands
                 play1.remove(index);
                 play2.remove(index);
                 
-                System.out.println("1" + play1.get(index));
-                System.out.println("2" + play2.get(index));
+                
+                //Print next cards
+                System.out.println("Player 1 Face Up" + play1.get(index));
+                System.out.println("Player 2 Face Up" + play2.get(index));
 
                      
             //If player 1 is greater than player 2
             if(play1.get(index).greater(play2.get(index)))
             {
+               //Go through table cards
                for(int t = 0; t < table.size(); t++)
                {
+                   //Add them to player 1's deck
                    play1.add(table.get(t));
                    
                    
@@ -224,8 +258,10 @@ public class WarTest
             //If player 1 is less than player 2
             else if(play1.get(index).less(play2.get(index)))
             {
+               //Go through table cards
                for(int t = 0; t < table.size(); t++)
                {
+                   //Add them to player 2's deck
                    play2.add(table.get(t));
                  
                }
@@ -234,124 +270,10 @@ public class WarTest
                   
             } 
            }
-           
-           
-
-                
-               
-                
-                
-                
-                  
-                
               
-                
             
-               
+      }     
             
-       
-            
-           
-            
-              
-                          
-            
-           
-            
-                       
-            
-            
-                 
-            
-            
-            
-       }     
-            
-            /*//Print card
-            System.out.println(play1.get(index));
-            System.out.println(play2.get(index));
-         
-         
-            //Print they are the same
-            System.out.println(play1.get(index).toString() + " has the same rank as " + play2.get(index).toString() 
-            + " with a rank of: "+play1.get(index).getRank());
-            System.out.println("The cards are equal.");
-            
-            //Player 1 and 2 draw second cards 
-            Card a = draw(play1,index+1);
-            Card b = draw(play2,index+1);
-            
-            //Print second cards
-            System.out.println("a: " + a);
-            System.out.println("b: " + b);
-                     
-            //Player 1 and 2 draw third cards         
-            Card e = draw(play1,index+2);
-            Card f = draw(play2,index+2);
-            
-            //Print third cards
-            System.out.println("e: " + e);
-            System.out.println("f: " + f);
-            
-            //If player 1's third card is greater than player 2's third card
-            if(e.greater(f))
-            {
-                //Player 1 gets all six cards
-                play1.add(a);
-                play1.add(b);
-                play1.add(e);
-                play1.add(f);
-                play1.add(play1.get(index));
-                play1.add(play2.get(index));
-                
-                //Remove three first instances of what player 1 played
-                play1.remove(a);
-                play1.remove(e);
-                play1.remove(play1.get(index));
-                
-                //Remove cards from player 2 that player 1 takes
-                play2.remove(b);
-                play2.remove(f);
-                play2.remove(play2.get(index));
-      
-            }  
-       
-            //If player 2's third card is greater than player 1's their card
-            else if(e.less(f))
-            {
-                //Player 2 gets all six cards
-                play2.add(a);
-                play2.add(b);
-                play2.add(e);
-                play2.add(f);
-                play2.add(play1.get(index));
-                play2.add(play2.get(index));
-                
-                //Remove three first instances of what player 2 played
-                play2.remove(b);
-                play2.remove(f);
-                play2.remove(play2.get(index));
-                
-                //Remove cards from player 2 that player 1 takes 
-                play1.remove(a);
-                play1.remove(e);
-                play1.remove(play1.get(index));
-
-                
-            } 
-            
-            //Go through another war
-            else if(e.equals(f))
-            {
-                System.exit(0);
-       
-            }
-            
-       
-       } */ 
-       
-       
-       
             
 
 }           

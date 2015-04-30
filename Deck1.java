@@ -1,36 +1,33 @@
-/**
- * Representation of a Deck of cards.  
- * Initialized to a standard 52 card deck. 
- *
- * @author Jackie Horton
- */
+/*Gretchen Girdzis
+CS110
+Assignment 10
+Deck class*/
 
+//Import random and arraylist
 import java.util.Random;
 import java.util.ArrayList;
+
+/**
+   The Deck1 class extends Card as it is Card, plus a little bit more - creating 52 cards objects.
+*/
 
 public class Deck1 extends Card
 {
    /** 
-   *  Number of cards in standard deck {@value #CARDS_IN_DECK}
+      Number of cards in standard deck
    **/
    final int CARDS_IN_DECK = 52;
 
-   /** The collection of Cards */
+   /** 
+      The collection of Cards arraylist
+   */
    private ArrayList<Card> deck = new ArrayList<Card>();
    
-   public ArrayList<Card> getArray()
-   {
    
-      return deck;
-      
-   
-   }
    
    /**
-    * Constructs a regular 52-card deck.  Initially, the cards
-    * are in a sorted order.  The shuffle() method can be called to
-    * randomize the order.  
-    */
+      Constructs a regular 52-card deck.   
+   */
     
    public Deck1()
    {        
@@ -38,9 +35,9 @@ public class Deck1 extends Card
             freshDeck();
    }
    
-   
+  
    /**
-   Create a new collection of 52 cards, in sorted order
+      Create a new collection of 52 cards, in sorted order
    */
    public void freshDeck()
    {
@@ -54,36 +51,27 @@ public class Deck1 extends Card
             
          }
       }
-            
-      
-     
-   
+          
    }
    
-  
-   
-   
-   /** 
-     * Remove and return the top Card on the Deck
-     * @return A reference to a Card that was top on the Deck
-     */
-      
-     /** 
-     * Return current number of Cards in Deck
-     * @return number of Cards in Deck
-     */
-
-   public int cardsRemaining()
-   {  
-      return deck.size();
-   }
-   
-   /** 
-     * Randomize the order of Cards in Deck
+    
+   /**
+      The getArray method returns the deck of 52 cards.
+      @return The deck.
    */
+   public ArrayList<Card> getArray()
+   {
    
+      return deck;
+      
+   
+   }
    
 
+   
+   /** 
+      Randomize the order of Cards in the deck..
+   */
    public void shuffle()
    {
       int randNum;
@@ -97,16 +85,8 @@ public class Deck1 extends Card
          deck.set(randNum,temp);
       }      
    }
-   /** 
-     * Determine if Deck is empty
-     * @return true if there are no more cards, false otherwise
-     */
    
-   public boolean isEmpty()
-   {
-      return (deck.size() == 0);
-   }
-
+   
    
    
   
